@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import SearchBar from "./components/SearchBar";
 import youtube from "./api/youtube";
 
 function App() {
+  const [videos,setVideos]=useState([]);
+
+  const [selectVideo,setSelectVideo]=useState({id:{}, snippet:{}});
+
   const handleSubmit = async (searchTerm) => {
     try {
-      const response = await youtube.get("search", {
+      const {data:{items:videos}}= await youtube.get("search", {
         params: {
           part: "snippet",
           maxResults: 5,
@@ -14,7 +18,8 @@ function App() {
           q: searchTerm,
         },
       });
-      console.log(response.data.items); 
+      setVideos(videos); 
+      setSelectVideo(videos[0]);
     } catch (error) {
       console.error("Error fetching videos:", error);
     }
