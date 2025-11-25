@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import SearchBar from "./components/SearchBar";
 import youtube from "./api/youtube";
+import VideoDetail from "./components/VideoDetail";
 
 function App() {
   const [videos,setVideos]=useState([]);
@@ -26,12 +27,12 @@ function App() {
   };
 
   return (
-    <Grid container justifyContent="center" spacing={2} style={{ padding: 20 }}>
+    <Grid container justifyContent="center" spacing={2} style={{ padding: 20 }}item xs={12}>
       <Grid item xs={11}>
         <SearchBar onSubmit={handleSubmit} />
       </Grid>
       <Grid item xs={8}>
-        {/* VideoDetail */}
+        <VideoDetail video={selectVideo}></VideoDetail>
       </Grid>
       <Grid item xs={4}>
         {/* VideoList */}
